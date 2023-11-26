@@ -9,9 +9,9 @@ type FeatureProps = {
   name: string;
   Icon: LucideIcon;
   description: string;
-};
+}[];
 
-export const FEATURES: FeatureProps[] = [
+export const FEATURES: FeatureProps = [
   {
     name: "Instant Delivery",
     Icon: ArrowDownToLine,
