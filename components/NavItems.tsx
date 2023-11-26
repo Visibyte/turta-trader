@@ -5,18 +5,29 @@ import NavItem from "./NavItem";
 
 const NavItems = () => {
   const [activeCategory, setActiveCategory] = useState<null | number>(null);
+
+  const isAnyActive = activeCategory !== null;
+
   return (
     <div className="flex gap-4 h-full">
       {CATEGORIES.map((category, index) => {
-        const handleOpen = () => {
+        const handleActive = () => {
           activeCategory === index
             ? setActiveCategory(null)
             : setActiveCategory(index);
         };
 
-        const isActiveCategory = activeCategory;
+        const isActive = index === activeCategory;
 
-        return <NavItem />;
+        return (
+          <NavItem
+            category={category}
+            handleActive={handleActive}
+            isActive={isActive}
+            key={category.value}
+            isAnyActive={isAnyActive}
+          />
+        );
       })}
     </div>
   );
