@@ -1,6 +1,7 @@
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Image from "next/image";
+import NavItems from "./NavItems";
 
 const Navbar = () => {
   return (
@@ -12,6 +13,9 @@ const Navbar = () => {
               <Link href="/">
                 <Image src="/logo.png" width={40} height={40} alt="" />
               </Link>
+            </div>
+            <div className="hidden z-50 lg:ml-8 lg:block lg:self-stretch">
+              <NavItems />
             </div>
           </div>
         </MaxWidthWrapper>
