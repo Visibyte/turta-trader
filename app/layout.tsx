@@ -18,7 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={cn("relative h-full antialiased", roboto.className)}>
-        {children}
+        {/* Prevents footer from creeping up the page */}
+        <main className="relative flex flex-col min-h-screen">
+          <div className="flex-grow flex-1">{children}</div>
+        </main>
       </body>
     </html>
   );
