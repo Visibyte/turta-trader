@@ -15,8 +15,10 @@ import {
 import { trpc } from "@/trpc/client";
 import { toast } from "sonner";
 import { ZodError } from "zod";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -29,11 +31,20 @@ export default function SignUpPage() {
     onError: (err) => {
       if (err.data?.code === "CONFLICT") {
         toast.error("An account is already associated with this email.");
+
+        return;
       }
 
       if (err instanceof ZodError) {
         toast.error(err.issues[0].message);
+
+        return;
       }
+      toast.error("Something went wrong. Please try again.");
+    },
+    onSuccess: ({ sentToEmail }) => {
+      toast.success(`Verification email sent to ${sentToEmail}.`);
+      router.push("/verify-email?to=" + sentToEmail);
     },
   });
 
