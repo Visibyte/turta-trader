@@ -105,6 +105,14 @@ export default function SignUpPage() {
                   )}
                 </div>
                 <Button>Sign Up</Button>
+                <p
+                  className={buttonVariants({
+                    variant: "link",
+                    className: "mt-1",
+                  })}
+                >
+                  Forgotten password?
+                </p>
               </div>
             </form>
           </div>

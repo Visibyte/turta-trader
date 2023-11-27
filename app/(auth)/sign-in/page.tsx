@@ -124,6 +124,14 @@ export default function SignInPage() {
                   )}
                 </div>
                 <Button>Sign In</Button>
+                <p
+                  className={buttonVariants({
+                    variant: "link",
+                    className: "mt-1",
+                  })}
+                >
+                  Forgotten password?
+                </p>
               </div>
             </form>
             <div className="relative">
