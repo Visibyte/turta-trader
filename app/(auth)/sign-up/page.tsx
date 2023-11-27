@@ -12,6 +12,7 @@ import {
   TAuthCredentialsValidator,
   AuthCredentialsValidator,
 } from "@/lib/validators/auth-credentials";
+import { trpc } from "@/trpc/client";
 
 export default function SignUpPage() {
   const {
@@ -22,7 +23,12 @@ export default function SignUpPage() {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {};
+  const { mutate, isLoading } = trpc.auth.createUser.useMutation({});
+
+  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+    mutate({ email, password });
+  };
+
   return (
     <>
       <div className="container relative flex pt-20 flex-col items-center justify-center lg:px-0">
@@ -47,6 +53,7 @@ export default function SignUpPage() {
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
+                    {...register("email")}
                     className={cn({
                       "focus-visible:ring-red-500": errors.email,
                     })}
@@ -56,10 +63,12 @@ export default function SignUpPage() {
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="password">Password</Label>
                   <Input
+                    {...register("password")}
                     className={cn({
                       "focus-visible:ring-red-500": errors.password,
                     })}
                     placeholder="Password"
+                    type="password"
                   />
                 </div>
                 <Button>Sign Up</Button>
