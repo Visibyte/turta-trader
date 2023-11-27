@@ -8,7 +8,9 @@ export const authRouter = router({
   createUser: publicProcedure
     .input(AuthCredentialsValidator)
     .mutation(async ({ input }) => {
-      const { email, password } = input;
+      // Normalise the email address to prevent client errors
+      const email = input.email.toLowerCase();
+      const { password } = input;
       const payload = await getPayloadClient();
 
       // Check if user already exists
