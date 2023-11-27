@@ -13,9 +13,10 @@ import { Separator } from "./ui/separator";
 import { formatPrice } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const Cart = () => {
-  const itemCount = 1;
+  const itemCount = 0;
   const transactionFee = 1;
   return (
     <Sheet>
@@ -68,7 +69,35 @@ const Cart = () => {
             </div>
           </>
         ) : (
-          <div></div>
+          <div className="flex h-full flex-col justify-center items-center space-y-1">
+            <div
+              aria-hidden="true"
+              className="flex flex-col relative mb-4 h-60 w-60 text-muted-foreground text-center"
+            >
+              <Image
+                src="/logo.png"
+                width={175}
+                height={175}
+                alt="Cart empty"
+                className="self-center justify-self-center"
+              />
+              <span className="mt-4 text-base">
+                Nothing here yet, try adding something to your cart!
+              </span>
+            </div>
+            <SheetTrigger asChild>
+              <Link
+                href="/products"
+                className={buttonVariants({
+                  variant: "link",
+                  size: "sm",
+                  className: "text-sm text-muted-foreground",
+                })}
+              >
+                Continue Shopping
+              </Link>
+            </SheetTrigger>
+          </div>
         )}
       </SheetContent>
     </Sheet>
