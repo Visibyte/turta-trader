@@ -13,6 +13,8 @@ import {
   AuthCredentialsValidator,
 } from "@/lib/validators/auth-credentials";
 import { trpc } from "@/trpc/client";
+import { toast } from "sonner";
+import { ZodError } from "zod";
 
 export default function SignUpPage() {
   const {
@@ -23,7 +25,17 @@ export default function SignUpPage() {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
-  const { mutate, isLoading } = trpc.auth.createUser.useMutation({});
+  const { mutate, isLoading } = trpc.auth.createUser.useMutation({
+    onError: (err) => {
+      if (err.data?.code === "CONFLICT") {
+        toast.error("An account is already associated with this email.");
+      }
+
+      if (err instanceof ZodError) {
+        toast.error(err.issues[0].message);
+      }
+    },
+  });
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
     mutate({ email, password });
