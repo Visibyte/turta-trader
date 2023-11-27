@@ -11,9 +11,17 @@ interface VerifyEmailProps {
 }
 
 const VerifyEmail = ({ token }: VerifyEmailProps) => {
-  const { data, isLoading, isError } = trpc.auth.validateEmail.useQuery({
-    token,
-  });
+  const { data, isLoading, isError } = trpc.auth.validateEmail.useQuery(
+    {
+      token,
+    },
+    {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      staleTime: Infinity, // prevents data from being considered stale
+      retry: false, // disables automatic retries on failure
+    }
+  );
 
   if (isError) {
     return (
