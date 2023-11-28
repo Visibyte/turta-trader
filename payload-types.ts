@@ -11,6 +11,7 @@ export interface Config {
     users: User;
     products: Product;
     media: Media;
+    product_files: ProductFile;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -39,6 +40,7 @@ export interface Product {
   description?: string | null;
   price: number;
   category: 'images' | 'category-2' | 'category-3';
+  product_files: string | ProductFile;
   status?: ('pending' | 'approved' | 'rejected') | null;
   priceId?: string | null;
   stripeId?: string | null;
@@ -48,6 +50,18 @@ export interface Product {
   }[];
   updatedAt: string;
   createdAt: string;
+}
+export interface ProductFile {
+  id: string;
+  user?: (string | null) | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
 }
 export interface Media {
   id: string;
