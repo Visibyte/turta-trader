@@ -1,4 +1,5 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import ProductReel from "@/components/ProductReel";
 import { Button } from "@/components/ui/button";
 import { FEATURES } from "@/utils/Features";
 import { MoveRight } from "lucide-react";
@@ -31,6 +32,12 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <ProductReel
+          query={{ sort: "desc", limit: 4 }}
+          title="Trending"
+          subtitle="Subtitle"
+          href="products"
+        />
       </MaxWidthWrapper>
       <section className="border-t border-slate-200 bg-slate-50">
         <MaxWidthWrapper className="py-20">
