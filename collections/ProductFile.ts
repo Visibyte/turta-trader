@@ -31,13 +31,35 @@ const ownerAndPurchased: Access = async ({ req }) => {
 
   const { docs: orders } = await req.payload.find({
     collection: "orders",
-    depth: 0,
+    depth: 2,
     where: {
       user: {
         equals: user.id,
       },
     },
   });
+
+  const purchasedProductFileIds = orders
+    .map((order) => {
+      return order.products.map((product) => {
+        if (typeof product === "string")
+          return req.payload.logger.error(
+            "Insufficient search depth to find purchased product ids"
+          );
+
+        return typeof product.product_files === "string"
+          ? product.product_files
+          : product.product_files.id;
+      });
+    })
+    .filter(Boolean)
+    .flat();
+
+  return {
+    id: {
+      in: [...ownsProductFileIds, ...purchasedProductFileIds],
+    },
+  };
 };
 
 export const ProductFile: CollectionConfig = {
@@ -50,6 +72,8 @@ export const ProductFile: CollectionConfig = {
   },
   access: {
     read: ownerAndPurchased,
+    update: ({ req }) => req.user.role === "admin",
+    delete: ({req}) => req.user.role === "admin",
   },
   upload: {
     staticURL: "/product_files",
