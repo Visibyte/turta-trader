@@ -2,11 +2,10 @@ import AddToCartButton from "@/components/AddToCartButton";
 import ImageSlider from "@/components/ImageSlider";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProductReel from "@/components/ProductReel";
-import { Button } from "@/components/ui/button";
 import { getPayloadClient } from "@/get-payload-client";
 import { formatPrice } from "@/lib/utils";
 import { CATEGORIES } from "@/utils/Categories";
-import { CheckIcon, Shield } from "lucide-react";
+import { Shield } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -116,7 +115,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
             <div>
               <div className="mt-10">
-                <AddToCartButton />
+                <AddToCartButton product={product} />
               </div>
               <div className="mt-6 text-center">
                 <div className="group inline-flex text-sm font-medium">
