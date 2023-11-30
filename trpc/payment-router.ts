@@ -41,14 +41,14 @@ export const paymentRouter = router({
         },
       });
 
-        const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
-        
-        filteredProducts.forEach((product) => {
-            line_items.push({
-                price: product.priceId!,
-                quantity: 1,
-            })
-        })
+      const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+
+      filteredProducts.forEach((product) => {
+        line_items.push({
+          price: product.priceId!,
+          quantity: 1,
+        });
+      });
 
       // Transaction fee
       line_items.push({
@@ -71,6 +71,12 @@ export const paymentRouter = router({
           },
           line_items,
         });
-      } catch (error) {}
+
+        return { url: stripeSession.url };
+      } catch (error) {
+        console.log(error);
+
+        return { url: null };
+      }
     }),
 });
