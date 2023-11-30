@@ -36,7 +36,7 @@ export const paymentRouter = router({
         collection: "orders",
         data: {
           _isPaid: false,
-          products: filteredProducts,
+          products: filteredProducts.map((product) => product.id),
           user: user.id,
         },
       });
