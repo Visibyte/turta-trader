@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks/UseCart";
 import { cn, formatPrice } from "@/lib/utils";
 import { CATEGORIES } from "@/utils/Categories";
 import { Loader2, X } from "lucide-react";

@@ -1,5 +1,5 @@
 "use client";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks/UseCart";
 import { formatPrice } from "@/lib/utils";
 import type { Product } from "@/payload-types";
 import { CATEGORIES } from "@/utils/Categories";

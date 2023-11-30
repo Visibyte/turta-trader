@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks/UseCart";
 import type { Product } from "@/payload-types";
 
 const AddToCartButton = ({ product }: { product: Product }) => {

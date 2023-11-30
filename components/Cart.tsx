@@ -14,7 +14,7 @@ import { formatPrice } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks/UseCart";
 import { ScrollArea } from "./ui/scroll-area";
 import CartItem from "./CartItem";
 import { useEffect, useState } from "react";
