@@ -6,6 +6,13 @@ import { getPayloadClient } from "./get-payload-client";
 import { Product } from "./payload-types";
 import { Resend } from "resend";
 import { ReceiptEmailHtml } from "./components/emails/ReceiptEmail";
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env" });
+
+if (!process.env.RESEND_API_KEY) {
+  throw new Error("Resend api key undefined");
+}
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -87,7 +94,7 @@ export const stripeWebhookHandler = async (
     // send receipt
     try {
       const data = await resend.emails.send({
-        from: "DigitalHippo <hello@joshtriedcoding.com>",
+        from: "Turta Trader <Nat@visibyte.dev>",
         to: [user.email],
         subject: "Thanks for your order! This is your receipt.",
         html: ReceiptEmailHtml({
