@@ -1,3 +1,4 @@
+"use client";
 import { formatPrice } from "../../lib/utils";
 import { Product } from "../../payload-types";
 import {

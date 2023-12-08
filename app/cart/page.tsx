@@ -8,6 +8,7 @@ import { Loader2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import * as React from "react";
 import { useEffect, useState } from "react";
 
 const CartPage = () => {
